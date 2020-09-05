@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="assets/css/styles.css">
+
+        <!-- =====BOX ICONS===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+        <title>SJSU Events</title>
+
+        <!-- ====SHEETY API====-->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $.getJSON('https://v2-api.sheety.co/980a3b1a2825f0a1bb29725e2844551f/sjsuEvents/events', function(data) {
+                var template = Handlebars.compile($('#item-template').html())
+                $('#events').html(template(data.events))
+            })
+        })
+        </script>
+
+        <!-- ==== FAVICON ====-->
+        <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/thumb/e/ec/San_Jose_State_Spartans_logo.svg/1200px-San_Jose_State_Spartans_logo.svg.png">
+
+    </head>
+    <body>
+
+        <!--===== HEADER =====-->
+        <header class="l-header">
+            <nav class="nav bd-grid">
+                <div>
+                    <a href="#" class="nav__logo">SJSU Events</a>
+                </div>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
+                        <li class="nav__item"><a href="about.html" class="nav__link active">About</a></li>
+                        <li class="nav__item"><a href="#work" class="nav__link active">Events</a></li>
+                        <li class="nav__item"><a href="post.html" class="nav__link">Post an Event</a></li>
+                        <li class="nav__item"><a href="campusAR.html" class="nav__link">campusAR</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+
+        <script id="item-template" type="text/x-handlebars-template">
+
+        <main class="l-main">
+
+            <!--===== HOME =====-->
+            <section class="home bd-grid" id="home">
+                <div class="home__data">
+                    <h1 class="home__title"><span class="home__title-color">SJSU</span> Events</h1>
+
+                    <a href="post.html" class="button">Post an Event</a>
+                </div>
+
+                <div class="home__social">
+
+                </div>
+
+                <div class="home__img">    
+                    <img src="assets/img/sjsu.png" alt="">
+                </div>
+            </section>
+
+            <!--===== EVENTS =====-->
+            <section class="work section" id="work">
+                <h2 class="section-title">Latest Events</h2>
+                    <ul class="work__container bd-grid">
+                        {{#each this}}
+                        <li class="work__img">
+                            <img src={{attachALinkToYourEventFlyer}} alt="">
+                            <br>
+                            <h1 style="text-align:center;white-space:pre-wrap;color:#74a0ff;">{{enterTheNameOfTheEvent}} </h1>
+                            <h1 style="text-align:center;white-space:pre-wrap;font-size: medium;"> Hosted By: {{enterNameOfOrganizationOrEventHost}} </h1>
+                            <p style="text-align:center;white-space:pre-wrap;">{{whereIsYourEventLocated?}} | {{enterEventDate}} </p>  
+                            <br>                  
+                        </li>
+                        {{/each}}
+                    </ul>
+            </section>
+
+        <!--===== FOOTER =====-->
+        <footer class="footer">
+            <p class="footer__title">SJSU Events</p>
+            <p>&#169; Built with 💛 by Rich & Ngoc 👨‍💻👩‍💻</p>
+        </footer>
+
+
+        <!--===== SCROLL REVEAL =====-->
+        <script src="https://unpkg.com/scrollreveal"></script>
+
+        <!--===== MAIN JS =====-->
+        <script src="assets/js/main.js"></script>
+        
+    </script>
+    <div id="events">Loading events...</div>
+    </body>
+</html>
